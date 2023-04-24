@@ -3,6 +3,7 @@ package redis
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/go-redis/redis"
 )
@@ -23,4 +24,12 @@ func New() (*Cacher, error) {
 	_, err := client.Ping().Result()
 
 	return &Cacher{client}, err
+}
+
+func (c *Cacher) Set(key string, value interface{}, expiration time.Duration) error {
+	return c.redis.Set(key, value, expiration).Err()
+}
+
+func (c *Cacher) Get(key string) ([]byte, error) {
+	return c.redis.Get(key).Bytes()
 }
