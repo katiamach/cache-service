@@ -26,8 +26,8 @@ func New() (*Cacher, error) {
 	return &Cacher{client}, err
 }
 
-func (c *Cacher) Set(key string, value interface{}, expiration time.Duration) error {
-	return c.redis.Set(key, value, expiration).Err()
+func (c *Cacher) Set(key string, value []byte, expiration int) error {
+	return c.redis.Set(key, value, time.Duration(expiration)*time.Second).Err()
 }
 
 func (c *Cacher) Get(key string) ([]byte, error) {

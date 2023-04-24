@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"time"
 
 	"github.com/gofiber/fiber/v2"
 )
 
 type Cacher interface {
-	Set(key string, value interface{}, expiration time.Duration) error
+	Set(key string, value []byte, expiration int) error
 	Get(key string) ([]byte, error)
 }
 
@@ -37,7 +36,7 @@ func (s *Service) GetUser(c *fiber.Ctx) error {
 		return fmt.Errorf("failed to read response body: %w", err)
 	}
 
-	err = s.cacher.Set(id, body, 10*time.Second)
+	err = s.cacher.Set(id, body, 10)
 	if err != nil {
 		return fmt.Errorf("failed to set user in cacher: %w", err)
 	}

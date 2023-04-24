@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/go-redis/redis"
+	"github.com/bradfitz/gomemcache/memcache"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -13,7 +13,10 @@ func (s *Service) VerifyCache(c *fiber.Ctx) error {
 	id := c.Params("id")
 
 	value, err := s.cacher.Get(id)
-	if errors.Is(err, redis.Nil) {
+
+	// if errors.Is(err, redis.Nil) {
+	// 	return c.Next()
+	if errors.Is(err, memcache.ErrCacheMiss) {
 		return c.Next()
 	} else if err != nil {
 		return err

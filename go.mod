@@ -3,16 +3,14 @@ module github.com/katiamach/cache-service
 go 1.18
 
 require (
+	github.com/bradfitz/gomemcache v0.0.0-20230124162541-5f7a7d875746
 	github.com/go-redis/redis v6.15.9+incompatible
-	github.com/gofiber/fiber v1.14.6
 	github.com/gofiber/fiber/v2 v2.44.0
 )
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/gofiber/utils v0.0.10 // indirect
 	github.com/google/uuid v1.3.0 // indirect
-	github.com/gorilla/schema v1.1.0 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
